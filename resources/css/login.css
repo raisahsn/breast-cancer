@@ -1,47 +1,112 @@
-html,
 body {
-    height: 100%;
-    background-color: #eceff1;
-}
-
-.form-signin {
-    max-width: 330px;
-    padding: 1rem;
-}
-
-.form-signin .form-label:focus-within {
-    z-index: 2;
-}
-
-.form-signin input[type="email"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
-
-.title-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    background-image: url('/img/background-new.png');
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-.title-bold {
-    font-size: 20px;
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.card-img {
+    width: 700px;
+    /* 50% of the card */
+    height: 100%;
+    padding: 0;
+    /* Remove padding around image */
+    margin: 0;
+    /* Remove margin */
+}
+
+.card-img img {
+    width: 700px;
+    height: 100%;
+    /* Ensure the image fills the space without stretching */
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.card-body {
+    width: 500px;
+    padding: 20px;
+    background-color: white;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+}
+
+h2 {
+    font-size: 34px;
     font-weight: bold;
-    text-transform: uppercase;
-    color: #1A237E;
+    color: #181275;
 }
 
-.title-light {
-    font-size: 18px;
-    font-weight: normal;
-    text-transform: uppercase;
-    color: #212121;
+p {
+    font-size: 24px;
+    font-weight: lighter;
+    color: #51505f;
+}
+
+.form-label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #555;
+}
+
+.form-control {
+    padding: 10px;
+    font-size: 16px;
+}
+
+.btn-primary {
+    background-color: #5fa4e0;
+    border: none;
+    cursor: pointer;
+    border-radius: 50px;
+    /* Oval shape */
+    padding: 8px 16px;
+    /* Adjust padding to fit the text */
+    font-size: 16px;
+    font-weight: bold;
+    width: auto;
+    /* Adjusts the width to be as large as the text */
+    display: inline-block;
+    /* Ensure button doesn't stretch unnecessarily */
+    text-align: center;
+    /* Center align the text inside the button */
+}
+
+.btn-primary:hover {
+    background-color: #4e92c0;
+    /* Darker blue for hover */
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-danger {
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.extra-links a {
+    color: #5fa4e0;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.extra-links a:hover {
+    text-decoration: underline;
 }

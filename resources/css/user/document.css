@@ -1,0 +1,128 @@
+.container-fluid.header-section {
+    padding: 20px;
+}
+
+.statistic-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    /* Sudut membulat */
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .05);
+    /* Bayangan lembut */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    /* Pastikan kartu memiliki tinggi yang sama dalam satu baris */
+}
+
+.card-header-top {
+    /* Tidak perlu justify-content: space-between; lagi jika hanya ada satu item */
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-size: 1rem;
+    color: #6c757d;
+    /* Warna teks abu-abu */
+    font-weight: 500;
+}
+
+/* Kelas-kelas .percentage-badge, .positive, .negative, dll. tidak lagi diperlukan */
+
+.card-main-value {
+    font-size: 2.2rem;
+    /* Ukuran angka utama */
+    font-weight: 700;
+    color: #343a40;
+    /* Warna teks gelap */
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.card-main-value .icon-circle {
+    background-color: #e0e7ff;
+    /* Latar belakang ikon lingkaran */
+    color: #7f52ff;
+    /* Warna ikon */
+    border-radius: 50%;
+    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    /* Ukuran lingkaran ikon */
+    height: 45px;
+    margin-right: 15px;
+    font-size: 1.2rem;
+}
+
+.card-footer-text {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .statistic-card {
+        margin-bottom: 20px;
+        /* Jarak antar kartu di layar kecil */
+    }
+}
+
+.search-bar {
+    background-color: #f2f2f2;
+    border-radius: 25px;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .05);
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding-left: 10px;
+    background-color: transparent;
+}
+
+.search-bar .form-control:focus {
+    box-shadow: none;
+    background-color: transparent;
+}
+
+.filter-buttons .btn {
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-weight: 500;
+}
+
+.filter-buttons .btn-light-purple {
+    background-color: #e0e7ff;
+    /* Warna ungu muda */
+    color: #4a5cbb;
+    /* Warna teks ungu gelap */
+    border: none;
+}
+
+.filter-buttons .btn-primary-purple {
+    background-color: #7f52ff;
+    /* Warna ungu utama */
+    color: white;
+    border: none;
+}
+
+.filter-buttons .dropdown-toggle::after {
+    margin-left: 10px;
+}
+
+/* Container responsif untuk tabel */
+.table-wrapper {
+    overflow-x: auto;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+}

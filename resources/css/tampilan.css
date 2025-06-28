@@ -18,6 +18,37 @@
     padding: 2rem;
     width: calc(100% - 200px);
     overflow-x: auto;
+    background-color: #e4e4e9;
+    min-height: calc(100vh - 0px);
+}
+
+.btn-custom {
+    background-color: #ffffff;
+    border: none;
+    cursor: pointer;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: bold;
+    width: auto;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-custom:hover {
+    background-color: #4e92c0;
+    /* Darker blue for hover */
+}
+
+/* Make the image circular (avatar style) */
+.avatar-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.btn-custom img {
+    margin-right: 8px;
 }
 
 /* Judul utama */
@@ -36,41 +67,45 @@
     color: #555;
 }
 
-/* Nama akun */
-.fw-semibold {
-    font-size: 14px;
-    color: #212121;
-}
 
 /* Spasi antar blok sidebar */
 .sidebar .offcanvas-header {
-    margin-bottom: 12px;
+    margin-bottom: 30px;
 }
 
-.sidebar .dropdown {
-    margin-bottom: 12px;
-}
 
-/* Nav styling */
+/* Change the text color of the nav links */
 .sidebar .nav-pills .nav-link {
-    margin-bottom: 6px;
-    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: #212121;
 }
 
-/* Hover untuk link */
+/* Change the text color for active nav links */
+.sidebar .nav-pills .nav-link.active {
+    color: #ffffff;
+    background-color: #00897b;
+}
+
+/* Hover effect for nav links */
 .sidebar .nav-pills .nav-link:hover {
-    background-color: #f5f5f5;
+    background-color: #00897b;
+    /* Hover background */
+    color: #ffffff;
+    /* Change the text color on hover */
 }
 
-/* Disabled tampil halus */
+/* Disabled link style */
 .sidebar .nav-link.disabled {
     color: #888;
+    /* Set color for disabled links */
 }
+
 
 /* Sidebar footer */
 .sidebar p:last-child {
     margin-top: 12px;
-    font-size: 13px;
+    font-size: 15px;
     color: #777;
 }
 
@@ -91,4 +126,5 @@ html {
     padding: 0;
     overflow-x: hidden;
     box-sizing: border-box;
+    height: 100%;
 }

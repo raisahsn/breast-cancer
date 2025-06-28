@@ -6,22 +6,13 @@
     </h5>
 </div>
 
-<!-- Akun -->
-<div class="dropdown w-100">
-    <a href="#" class="d-flex align-items-center text-decoration-none gap-2" data-bs-toggle="dropdown"
-        aria-expanded="false">
-        <i class="bi bi-person-circle" style="font-size: 1.5rem; color: cornflowerblue;"></i>
-        <span class="fw-semibold">nama account</span>
-    </a>
-    <ul class="dropdown-menu">
-        <li><button class="dropdown-item" type="button">Logout</button></li>
-    </ul>
-</div>
-
-
 <!-- Menu Navigasi -->
 <div class="offcanvas-body w-100">
     <ul class="nav flex-column nav-pills">
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" aria-current="page"
+                href="{{ route('dashboard') }}"><i class="bi bi-house me-2"></i>Dashboar</a>
+        </li>
         <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('prediction') ? 'active' : '' }}" aria-current="page"
                 href="{{ route('prediction') }}"><i class="bi bi-graph-up-arrow me-2"></i>Prediction</a>
@@ -29,13 +20,12 @@
         <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('document') || request()->routeIs('documents') || request()->routeIs('download') ? 'active' : '' }}"
                 href="{{ route('document') }}">
-                <i class="bi bi-folder2-open me-2"></i>Document
+                <i class="bi bi-box2-heart me-2"></i>Patients
             </a>
-
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('account') ? 'active' : '' }}" href="{{ route('account') }}"><i
-                    class="bi bi-people me-2"></i>Accounts</a>
+            <a class="nav-link {{ request()->routeIs('account') || request()->routeIs('accounts') || request()->routeIs('newaccount') ? 'active' : '' }}"
+                aria-current="page" href="{{ route('account') }}"><i class="bi bi-people me-2"></i>Account</a>
         </li>
     </ul>
 </div>

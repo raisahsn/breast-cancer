@@ -1,0 +1,220 @@
+.container-fluid.header-section {
+    padding: 20px;
+}
+
+.statistic-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    /* Sudut membulat */
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .05);
+    /* Bayangan lembut */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    /* Pastikan kartu memiliki tinggi yang sama dalam satu baris */
+}
+
+.card-header-top {
+    /* Tidak perlu justify-content: space-between; lagi jika hanya ada satu item */
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-size: 1rem;
+    color: #6c757d;
+    /* Warna teks abu-abu */
+    font-weight: 500;
+}
+
+/* Kelas-kelas .percentage-badge, .positive, .negative, dll. tidak lagi diperlukan */
+
+.card-main-value {
+    font-size: 2.2rem;
+    /* Ukuran angka utama */
+    font-weight: 700;
+    color: #343a40;
+    /* Warna teks gelap */
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.card-main-value .icon-circle {
+    background-color: #e0e7ff;
+    /* Latar belakang ikon lingkaran */
+    color: #7f52ff;
+    /* Warna ikon */
+    border-radius: 50%;
+    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    /* Ukuran lingkaran ikon */
+    height: 45px;
+    margin-right: 15px;
+    font-size: 1.2rem;
+}
+
+.card-footer-text {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .statistic-card {
+        margin-bottom: 20px;
+        /* Jarak antar kartu di layar kecil */
+    }
+}
+
+.chart-container-wrapper {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px S10px rgba(0, 0, 0, .05);
+    padding: 25px;
+    max-width: 900px;
+    margin: 20px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.chart-header h5 {
+    font-weight: 600;
+    color: #343a40;
+    margin-bottom: 0;
+}
+
+.chart-options .btn {
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    color: #6c757d;
+    border-color: #e9ecef;
+}
+
+.chart-options .dropdown-toggle::after {
+    margin-left: 8px;
+}
+
+.chart-area {
+    position: relative;
+    height: 250px;
+    width: 100%;
+}
+
+.chart-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    flex-wrap: wrap;
+}
+
+.footer-left-text {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.footer-left-text strong {
+    color: #343a40;
+    font-weight: 700;
+}
+
+.legend-items {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-left: 20px;
+}
+
+.legend-item .color-box {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    margin-right: 8px;
+}
+
+.legend-item .color-box.blue {
+    background-color: #7f52ff;
+}
+
+.legend-item .color-box.light-blue {
+    background-color: #e0e7ff;
+    border: 1px solid #e0e7ff;
+}
+
+/* Custom Tooltip Style */
+.chartjs-tooltip {
+    background: #343a40 !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+    padding: 10px 15px !important;
+    opacity: 1 !important;
+    transform: translate(-50%, -110%) !important;
+    pointer-events: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .2);
+    text-align: center;
+    white-space: nowrap;
+}
+
+.chartjs-tooltip::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    transform: translateX(-50%) rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background: #343a40;
+    border-radius: 2px;
+}
+
+.chartjs-tooltip-header {
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.chartjs-tooltip-body {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Wadah utama untuk grafik agar terlihat rapi di tengah */
+.chart-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    padding: 25px;
+    max-width: 900px;
+    margin: 20px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Pastikan kanvas grafik responsif */
+canvas {
+    width: 100% !important;
+    height: auto !important;
+}
