@@ -18,14 +18,20 @@
                 href="{{ route('prediction') }}"><i class="bi bi-graph-up-arrow me-2"></i>Prediction</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('document') || request()->routeIs('documents') || request()->routeIs('download') ? 'active' : '' }}"
+            <a class="nav-link {{ request()->routeIs('document') ? 'active' : '' }}" aria-current="page"
                 href="{{ route('document') }}">
                 <i class="bi bi-box2-heart me-2"></i>Patients
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('account') || request()->routeIs('accounts') || request()->routeIs('newaccount') ? 'active' : '' }}"
-                aria-current="page" href="{{ route('account') }}"><i class="bi bi-people me-2"></i>Account</a>
+            <a class="nav-link {{ request()->routeIs('training') ? 'active' : '' }}" aria-current="page"
+                href="{{ route('training') }}">
+                <i class="bi bi-arrow-down-square me-2"></i>Training
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('account') ? 'active' : '' }}" aria-current="page"
+                href="{{ route('account') }}"><i class="bi bi-people me-2"></i>Account</a>
         </li>
     </ul>
 </div>

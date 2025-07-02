@@ -73,9 +73,35 @@
     <div class="row">
         <div class="col">
             <div class="chart-container">
-                <canvas id="diagnosisChart"></canvas>
+                <div class="chart-header">
+                    <h5>Diagnosis</h5>
+                    <div class="chart-options d-flex align-items-center">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="timePeriodDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                This Year
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="timePeriodDropdown">
+                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                                <li><a class="dropdown-item" href="#">Last Year</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-area">
+                    <canvas id="diagnosisChart"></canvas>
+                </div>
+
+                <div class="chart-footer">
+                    <div class="footer-left-text">
+                        Current Year Total: <strong id="totaldiagnosis">0</strong>
+                    </div>
+                </div>
             </div>
         </div>
+
+
         <div class="col">
             <div class="chart-container-wrapper">
                 <div class="chart-header">
