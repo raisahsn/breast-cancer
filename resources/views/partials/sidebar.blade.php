@@ -31,7 +31,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('account') ? 'active' : '' }}" aria-current="page"
-                href="{{ route('account') }}"><i class="bi bi-people me-2"></i>Account</a>
+                href="{{ route('account.index') }}"><i class="bi bi-people me-2"></i>Account</a>
         </li>
     </ul>
 </div>

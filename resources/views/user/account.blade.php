@@ -1,4 +1,3 @@
-// resources/views/user/account.blade.php
 @extends('layouts.tampilan')
 @section('title', 'Accounts')
 @section('judul')
@@ -98,8 +97,8 @@
                             <select class="form-select" id="roleAddSelect" name="idRole" required>
                                 <option selected disabled value="">Pilih role...</option>
                                 <option value="1">Admin</option>
-                                <option value="2">Lab</option>
-                                <option value="3">Doctor</option>
+                                <option value="2">Doctor</option>
+                                <option value="3">Lab</option>
                             </select>
                         </div>
                     </div>

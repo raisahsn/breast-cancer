@@ -30,8 +30,22 @@
                 <div class="dropdown d-grid gap-2 d-md-flex justify-content-md-end">
                     <button class="btn btn-custom dropdown-toggle rounded-pill" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <img src="{{ asset('img/stethescope.png') }}" alt="Avatar" class="avatar-img me-2">
-                        Nama Dokter
+
+                        @php
+                            // Ambil nama role, ubah ke huruf kecil, dan siapkan default jika tidak ada
+                            $roleName = strtolower(data_get($loggedInUser, 'role.roleName', ''));
+                        @endphp
+
+                        {{-- Logika untuk memilih gambar berdasarkan role --}}
+                        @if ($roleName == 'admin')
+                            <img src="{{ asset('img/user.png') }}" alt="Admin Avatar" class="avatar-img me-2">
+                        @elseif ($roleName == 'doctor' || $roleName == 'dokter')
+                            <img src="{{ asset('img/stethescope.png') }}" alt="Doctor Avatar" class="avatar-img me-2">
+                        @else
+                            <img src="{{ asset('img/lab.png') }}" alt="Lab Avatar" class="avatar-img me-2">
+                        @endif
+
+                        {{ $loggedInUser['name'] ?? 'User' }}
                     </button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#changePassModal"
@@ -52,11 +66,14 @@
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="changePassModalLabel">Ganti Password</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form id="form-ganti-password" data-action="{{ url('/user/password') }}">
+                <form id="form-ganti-password" method="POST">
+                    @csrf
+                    @method('PATCH')
+                    @method('PUT')
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="changePassModalLabel">Ganti Password</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="editPasswordInput" class="form-label">Password Baru</label>
@@ -78,61 +95,77 @@
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
     </script>
 
+    <!-- Tambahkan ini sebelum </body> -->
+    @stack('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Dapatkan elemen-elemen yang dibutuhkan
             const changePassForm = document.getElementById('form-ganti-password');
-            const alertContainer = document.getElementById('password-change-alert');
+            const passwordInput = document.getElementById('editPasswordInput');
+            const alertBox = document.getElementById('password-change-alert');
+
+            // Ambil ID user yang sedang login dari variabel yang sudah kita buat di AppServiceProvider
+            const userId = "{{ $loggedInUser['idAccount'] ?? '' }}";
 
             if (changePassForm) {
-                changePassForm.addEventListener('submit', async function(event) {
-                    event.preventDefault();
+                changePassForm.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Mencegah form dikirim secara normal
 
-                    const newPassword = document.getElementById('editPasswordInput').value;
-                    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute(
-                        'content');
-                    const actionUrl = changePassForm.dataset.action;
-                    alertContainer.innerHTML = '';
+                    const userId = "{{ $loggedInUser['idAccount'] ?? '' }}";
+                    const actionUrl = `{{ url('/user') }}/${userId}/password/change`;
 
-                    try {
-                        const response = await fetch(actionUrl, {
-                            method: 'POST', // Pastikan ini 'POST'
+                    // ==========================================================
+                    // TAMBAHKAN DUA BARIS INI UNTUK DEBUG
+                    console.log("User ID yang digunakan:", userId);
+                    console.log("URL yang akan di-fetch:", actionUrl);
+                    // ==========================================================
+
+                    // Kirim data menggunakan Fetch API (AJAX)
+                    fetch(actionUrl, {
+                            method: 'PATCH',
                             headers: {
-                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
                                 'Accept': 'application/json',
-                                'X-CSRF-TOKEN': csrfToken
+                                'Content-Type': 'application/json'
                             },
                             body: JSON.stringify({
-                                newPassword: newPassword,
-                                _method: 'POST' // Dan ada baris ini
+                                newPassword: passwordInput.value
                             })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.error === false) {
+                                // 1. Dapatkan kontrol modal dan tutup
+                                const modalElement = document.getElementById('changePassModal');
+                                const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                                modalInstance.hide();
+
+                                // 2. Tampilkan pesan sukses menggunakan alert bawaan browser
+                                alert(data.message);
+
+                                // 3. (Opsional tapi disarankan) Refresh halaman agar sesi diperbarui
+                                location.reload();
+                            } else {
+                                alertBox.innerHTML =
+                                    `<div class="alert alert-danger" role="alert">${data.message || 'Terjadi kesalahan.'}</div>`;
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alertBox.innerHTML =
+                                `<div class="alert alert-danger" role="alert">Tidak dapat terhubung ke server.</div>`;
                         });
-
-                        const result = await response.json();
-
-                        if (!response.ok) {
-                            throw new Error(result.message || 'Gagal mengubah password.');
-                        }
-
-                        alertContainer.innerHTML =
-                            `<div class="alert alert-success">${result.message}</div>`;
-                        changePassForm.reset();
-                        setTimeout(() => {
-                            const modalInstance = bootstrap.Modal.getInstance(document
-                                .getElementById('changePassModal'));
-                            if (modalInstance) modalInstance.hide();
-                        }, 2000);
-
-                    } catch (error) {
-                        // Tambahkan logging untuk debugging yang lebih baik
-                        console.error("Terjadi error saat mengubah password:", error);
-                        alertContainer.innerHTML =
-                            `<div class="alert alert-danger">${error.message}</div>`;
-                    }
                 });
             }
 
-            // Pastikan meta tag csrf-token ada di <head> halaman Anda
-            // <meta name="csrf-token" content="{{ csrf_token() }}">
+            // Membersihkan alert setiap kali modal dibuka kembali
+            const changePassModal = document.getElementById('changePassModal');
+            if (changePassModal) {
+                changePassModal.addEventListener('show.bs.modal', function() {
+                    alertBox.innerHTML = '';
+                    passwordInput.value = '';
+                });
+            }
         });
     </script>
 </body>

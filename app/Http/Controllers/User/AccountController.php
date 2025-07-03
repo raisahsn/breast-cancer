@@ -9,7 +9,7 @@ use Illuminate\Http\Client\ConnectionException;
 
 class AccountController extends Controller
 {
-    public function showAccount(Request $request)
+public function showAccount(Request $request)
 {
     $token = session()->get('api_token');
 
@@ -17,14 +17,12 @@ class AccountController extends Controller
         return redirect()->route('login');
     }
 
-    // Mengambil data tanpa pagination
     $response = Http::withToken($token)
-                    ->get('http://localhost:3000/api/users'); // Tanpa parameter 'page'
+                    ->get('http://localhost:3000/api/users');
 
     if ($response->successful()) {
-        // Mengambil data users dari API
-        $users = $response->json()['data']['users']; // Pastikan kita mengakses 'users' dengan benar
-        return view('user.account', compact('users'));
+        $users = $response->json()['data']['users'];
+        return view('user.account', compact('users')); // <-- Kembalikan seperti semula
     } else {
         return back()->with('error', 'Gagal mengambil data akun');
     }

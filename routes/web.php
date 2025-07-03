@@ -18,39 +18,25 @@ Route::get('/', fn () => view('welcome'));
 Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
 // Route untuk MEMPROSES data login
 Route::post('/login', [LoginController::class, 'processLogin'])->name('login.post');
-// Route untuk DASHBOARD yang akan kita tuju setelah login berhasil
-Route::get('/dashboard', function () {
-    // Sebagai contoh, kita akan lindungi halaman ini secara manual
-    // dengan mengecek apakah ada 'user' di session.
-    if (!session()->has('user')) {
-        return redirect()->route('login');
-    }
-    // Jika ada, tampilkan view dashboard
-    return view('dashboard');
-})->name('dashboard');
 
-// Tampilan utama
-Route::post('/user/password', [TampilanController::class, 'changePassword'])
-    ->name('user.password.change')
-    ->middleware('web');
+Route::middleware(['check.api_session'])->group(function () {
 
+    // Logout
+    //Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Halaman Dashboard
-Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
+    // Halaman Utama
+    Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
+    Route::get('/prediction', [PredictionController::class, 'showPrediction'])->name('prediction');
+    Route::get('/training', [TrainingController::class, 'showTraining'])->name('training');
+    Route::get('/document', [DocumentController::class, 'showDocument'])->name('document');
 
-// Halaman Prediksi
-Route::get('/prediction', [PredictionController::class, 'showPrediction'])->name('prediction');
+    // Manajemen Akun
+    Route::get('/account', [AccountController::class, 'showAccount'])->name('account.index');
+    Route::post('/account/register', [AccountController::class, 'registerUser'])->name('register');
+    Route::put('/account/{id}/update', [AccountController::class, 'updateUser'])->name('account.update');
+    Route::delete('/account/{id}/delete', [AccountController::class, 'deleteUser'])->name('account.delete');
 
-// Tampilan Dokumen
-Route::get('/document', [DocumentController::class, 'showDocument'])->name('document');
+    // Aksi Pengguna (misal: ganti password dari layout)
+    Route::patch('/user/{id}/password/change', [TampilanController::class, 'changePassword'])->name('password.update');
 
-
-// Route untuk menampilkan halaman daftar akun
-Route::get('/account', [AccountController::class, 'showAccount'])->name('account.index');
-
-// Route untuk memproses form penambahan akun baru
-Route::post('/account/register', [AccountController::class, 'registerUser'])->name('register');
-
-
-// Tampilan Training
-Route::get('/training', [TrainingController::class, 'showTraining'])->name('training');
+});
